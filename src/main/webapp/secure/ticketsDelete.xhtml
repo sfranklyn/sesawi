@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"   
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <ui:composition template="/template.xhtml">
+        <ui:define name="content">
+            <f:metadata>
+                <f:event type="preRenderView" listener="#{tickets.findTicket()}"/>
+            </f:metadata>
+            <h1>#{msgs.delete} #{msgs.ticket}</h1>
+            <p:link value="#{msgs.tickets_maintenance}" outcome="tickets"/><br/><br/>
+            <h:form>
+                <table>
+                    <tr>
+                        <td>#{msgs.ticket_no}</td>
+                        <td>:#{tickets.tickets.ticketNo}</td>
+                    </tr>
+                    <tr>
+                        <td>#{msgs.location_name}</td>
+                        <td>:#{tickets.tickets.locationName}</td>
+                    </tr>
+                    <tr>
+                        <td>#{msgs.computer_name}</td>
+                        <td>:#{tickets.tickets.computerName}</td>
+                    </tr>
+                    <tr>
+                        <td>#{msgs.user_name}</td>
+                        <td>:#{tickets.tickets.userName}</td>
+                    </tr>
+                    <tr>
+                        <td>#{msgs.ticket_entry_time}</td>
+                        <td>:#{tickets.tickets.ticketEntryTime}</td>
+                    </tr>
+                    <tr>
+                        <td>#{msgs.ticket_exit_time}</td>
+                        <td>:#{tickets.tickets.ticketExitTime}</td>
+                    </tr>
+                    <tr>
+                        <td>#{msgs.ticket_police_no}</td>
+                        <td>:#{tickets.tickets.ticketPoliceNo}</td>
+                    </tr>
+                    <tr>
+                        <td>#{msgs.price_code}</td>
+                        <td>:#{tickets.tickets.priceCode}</td>
+                    </tr>
+                    <tr>
+                        <td>#{msgs.price_entry}</td>
+                        <td>:#{tickets.tickets.priceEntry}</td>
+                    </tr>
+                    <tr>
+                        <td>#{msgs.price_entry_hour}</td>
+                        <td>:#{tickets.tickets.priceEntryHour}</td>
+                    </tr>
+                    <tr>
+                        <td>#{msgs.price_per_hour}</td>
+                        <td>:#{tickets.tickets.pricePerHour}</td>
+                    </tr>
+                    <tr>
+                        <td>#{msgs.price_lost}</td>
+                        <td>:#{tickets.tickets.priceLost}</td>
+                    </tr>
+                    <tr>
+                        <td>#{msgs.ticket_duration}</td>
+                        <td>:#{tickets.tickets.ticketDuration}</td>
+                    </tr>
+                    <tr>
+                        <td>#{msgs.ticket_lost}</td>
+                        <td>:#{tickets.tickets.ticketLost}</td>
+                    </tr>                    
+                    <tr>
+                        <td>#{msgs.ticket_price}</td>
+                        <td>:#{tickets.tickets.ticketPrice}</td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td><p:commandButton value="#{msgs.delete}"
+                                             ajax="false"
+                                             action="#{tickets.saveDelete()}" />
+                        </td>
+                    </tr>
+                </table>
+            </h:form>
+            <p:messages/>
+        </ui:define>
+    </ui:composition>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:composition template="/template.xhtml">
+        <ui:define name="content">
+            <f:metadata>
+                <f:event type="preRenderView" listener="#{locations.findLocation}"/>
+            </f:metadata>
+            <h1>#{msgs.update} #{msgs.location}</h1>
+            <p:link value="#{msgs.locations_maintenance}" outcome="locations"/><br/><br/>
+            <h:form>
+                <table>
+                    <tr>
+                        <td>#{msgs.location_name}</td>
+                        <td>:#{locations.locations.locationName}</td>
+                    </tr>
+                    <tr>
+                        <td>#{msgs.location_desc}</td>
+                        <td>:<p:inputText maxlength="200"
+                                          value="#{locations.locations.locationDesc}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>#{msgs.owner_name}</td>
+                        <td>:<p:selectOneMenu value="#{locations.locations.owners.ownerName}">
+                                <f:selectItems value="#{locations.ownerNameList}" />
+                            </p:selectOneMenu>
+                        </td>
+                    </tr>                                        
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td><p:commandButton value="#{msgs.update}" 
+                                             ajax="false"
+                                             action="#{locations.saveUpdate}" />
+                        </td>
+                    </tr>
+                </table>
+            </h:form>
+            <p:messages/>
+        </ui:define>
+    </ui:composition>
+</html>

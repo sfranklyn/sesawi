@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <ui:composition template="/template.xhtml">
+        <ui:define name="content">
+            <h1>#{msgs.create} #{msgs.price}</h1>
+            <p:link value="#{msgs.prices_maintenance}" outcome="prices"/><br/><br/>
+            <h:form id="pricesCreate">
+                <table>
+                    <tr>
+                        <td>#{msgs.price_code}</td>
+                        <td>:<p:inputText size="6" maxlength="5"
+                                          value="#{prices.prices.priceCode}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>#{msgs.price_entry}</td>
+                        <td>:<p:inputText size="6" maxlength="5" 
+                                          label="#{msgs.price_entry}"
+                                          value="#{prices.prices.priceEntry}" 
+                                          required="true"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>#{msgs.price_entry_hour}</td>
+                        <td>:<p:inputText size="2" maxlength="1"
+                                          label="#{msgs.price_entry_hour}"
+                                          value="#{prices.prices.priceEntryHour}"
+                                          required="true"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>#{msgs.price_per_hour}</td>
+                        <td>:<p:inputText size="6" maxlength="5"
+                                          label="#{msgs.price_per_hour}"
+                                          value="#{prices.prices.pricePerHour}"
+                                          required="true"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>#{msgs.price_lost}</td>
+                        <td>:<p:inputText size="6" maxlength="5"
+                                          label="#{msgs.price_lost}"
+                                          value="#{prices.prices.priceLost}"
+                                          required="true"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td><p:commandButton value="#{msgs.create}"
+                                             ajax="false"
+                                             action="#{prices.saveCreate()}" />
+                        </td>
+                    </tr>
+                </table>
+            </h:form>
+            <p:messages/>
+        </ui:define>
+    </ui:composition>
+</html>

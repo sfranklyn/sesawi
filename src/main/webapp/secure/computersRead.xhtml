@@ -1,0 +1,29 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:composition template="/template.xhtml">
+        <ui:define name="content">
+            <f:metadata>
+                <f:event type="preRenderView" listener="#{computers.findComputer()}"/>
+            </f:metadata>
+            <h1>#{msgs.read} #{msgs.computer}</h1>
+            <h:link value="#{msgs.computers_maintenance}" outcome="computers"/><br/><br/>
+            <table>
+                <tr>
+                    <td>#{msgs.computer_name}</td>
+                    <td>:#{computers.computers.computerName}</td>
+                </tr>
+                <tr>
+                    <td>#{msgs.computer_desc}</td>
+                    <td>:#{computers.computers.computerDesc}</td>
+                </tr>
+                <tr>
+                    <td>#{msgs.location_name}</td>
+                    <td>:#{computers.computers.locations.locationName}</td>
+                </tr>
+            </table>
+        </ui:define>
+    </ui:composition>
+</html>

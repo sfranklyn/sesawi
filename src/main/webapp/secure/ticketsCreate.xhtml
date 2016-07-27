@@ -1,0 +1,146 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <ui:composition template="/template.xhtml">
+        <ui:define name="content">
+            <h1>#{msgs.create} #{msgs.ticket}</h1>
+            <p:link value="#{msgs.tickets_maintenance}" outcome="tickets"/><br/><br/>
+            <h:form>
+                <table>
+                    <tr>
+                        <td>#{msgs.ticket_no}</td>
+                        <td>:<p:inputText size="20" maxlength="12"
+                                          value="#{tickets.tickets.ticketNo}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>#{msgs.location_name}</td>
+                        <td>:<p:selectOneMenu value="#{tickets.tickets.locationName}">
+                                <f:selectItems value="#{tickets.locationNameList}" />
+                            </p:selectOneMenu>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>#{msgs.computer_name}</td>
+                        <td>:<p:selectOneMenu value="#{tickets.tickets.computerName}">
+                                <f:selectItems value="#{tickets.computerNameList}" />
+                            </p:selectOneMenu>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>#{msgs.user_name}</td>
+                        <td>:<p:selectOneMenu value="#{tickets.tickets.userName}">
+                                <f:selectItems value="#{tickets.userNameList}" />
+                            </p:selectOneMenu>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>#{msgs.ticket_entry_time}</td>
+                        <td>:<p:calendar value="#{tickets.tickets.ticketEntryTime}"
+                                         pattern="yyyy-MM-dd HH:mm:ss"
+                                         readonlyInput="true"
+                                         label="#{msgs.ticket_entry_time}"
+                                         required="true"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>#{msgs.ticket_exit_time}</td>
+                        <td>:<p:calendar value="#{tickets.tickets.ticketExitTime}"
+                                         pattern="yyyy-MM-dd HH:mm:ss" 
+                                         readonlyInput="true"
+                                         >
+                                <p:ajax event="dateSelect" listener="#{tickets.ticketExitTimeSelect()}" 
+                                        update="ticketDuration,ticketPrice" />
+                            </p:calendar>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>#{msgs.ticket_police_no}</td>
+                        <td>:<p:inputText size="20" maxlength="15"
+                                          value="#{tickets.tickets.ticketPoliceNo}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>#{msgs.price_code}</td>
+                        <td>:<p:selectOneMenu value="#{tickets.tickets.priceCode}">
+                                <f:selectItems value="#{tickets.priceCodeList}" />
+                                <p:ajax listener="#{tickets.priceCodeSelect()}"
+                                        update="priceEntry,priceEntryHour,pricePerHour,
+                                        priceLost,ticketPrice"/>
+                            </p:selectOneMenu>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>#{msgs.price_entry}</td>
+                        <td>:<p:inputText id="priceEntry"
+                                          size="6" maxlength="5" 
+                                          label="#{msgs.price_entry}"
+                                          value="#{tickets.tickets.priceEntry}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>#{msgs.price_entry_hour}</td>
+                        <td>:<p:inputText id="priceEntryHour"
+                                          size="2" maxlength="1"
+                                          label="#{msgs.price_entry_hour}"
+                                          value="#{tickets.tickets.priceEntryHour}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>#{msgs.price_per_hour}</td>
+                        <td>:<p:inputText id="pricePerHour"  
+                                          size="6" maxlength="5"
+                                          label="#{msgs.price_per_hour}"
+                                          value="#{tickets.tickets.pricePerHour}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>#{msgs.price_lost}</td>
+                        <td>:<p:inputText id="priceLost"  
+                                          size="6" maxlength="5"
+                                          label="#{msgs.price_lost}"
+                                          value="#{tickets.tickets.priceLost}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>#{msgs.ticket_duration}</td>
+                        <td>:<p:inputText id="ticketDuration"
+                                          size="6" maxlength="3"
+                                          label="#{msgs.ticket_duration}"
+                                          value="#{tickets.tickets.ticketDuration}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>#{msgs.ticket_lost}</td>
+                        <td>:<p:selectBooleanCheckbox id="ticketLost"
+                                                      label="#{msgs.ticket_lost}"
+                                                      value="#{tickets.tickets.ticketLost}">
+                                <p:ajax listener="#{tickets.priceCodeSelect()}"
+                                        update="ticketPrice"/>                                
+                            </p:selectBooleanCheckbox>
+                        </td>
+                    </tr>                    
+                    <tr>
+                        <td>#{msgs.ticket_price}</td>
+                        <td>:<p:inputText id="ticketPrice"
+                                          size="13" maxlength="9"
+                                          label="#{msgs.ticket_price}"
+                                          value="#{tickets.tickets.ticketPrice}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td><p:commandButton value="#{msgs.create}"
+                                             ajax="false"
+                                             action="#{tickets.saveCreate}" />
+                        </td>
+                    </tr>
+                </table>
+            </h:form>
+            <p:messages/>
+        </ui:define>
+    </ui:composition>
+</html>

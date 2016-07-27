@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <ui:composition template="/template.xhtml">
+        <ui:define name="content">
+            <h1>#{msgs.prices_maintenance}</h1>
+            <h:form>
+                <p:commandLink action="#{prices.create()}"
+                               value="#{msgs.create}"/>
+                <br/><br/>
+                <p:dataTable value="#{prices.dataModel}"
+                             rows="#{prices.noOfRows}"
+                             var="price" paginator="true" lazy="true">
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{msgs.price_code}"/>
+                        </f:facet>
+                        #{price.priceCode}
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{msgs.price_entry}"/>
+                        </f:facet>
+                        #{price.priceEntry}
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{msgs.price_entry_hour}"/>
+                        </f:facet>
+                        #{price.priceEntryHour}
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{msgs.price_per_hour}"/>
+                        </f:facet>
+                        #{price.pricePerHour}
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{msgs.price_lost}"/>
+                        </f:facet>
+                        #{price.priceLost}
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{msgs.action}"/>
+                        </f:facet>
+                        <h:link value="#{msgs.read}" outcome="pricesRead">
+                            <f:param name="priceId" value="#{price.priceId}"/>
+                        </h:link>&nbsp;&nbsp;
+                        <h:link value="#{msgs.update}" outcome="pricesUpdate">
+                            <f:param name="priceId" value="#{price.priceId}"/>
+                        </h:link>&nbsp;&nbsp;
+                        <h:link value="#{msgs.delete}" outcome="pricesDelete">
+                            <f:param name="priceId" value="#{price.priceId}"/>
+                        </h:link>
+                    </p:column>
+                </p:dataTable>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>
